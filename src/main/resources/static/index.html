@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Libros</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Sistema de Gestión de Libros</h1>
+            <p>Gestión completa con búsquedas avanzadas</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Formulario de Libro -->
+            <section class="form-section">
+                <h2 id="form-title">Crear Nuevo Libro</h2>
+                <form id="book-form">
+                    <input type="hidden" id="book-id">
+                    
+                    <div class="form-group">
+                        <label for="isbn">ISBN *</label>
+                        <input type="text" id="isbn" required placeholder="978-0-13-468599-1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Título *</label>
+                        <input type="text" id="title" required placeholder="Clean Code">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="author">Autor *</label>
+                        <input type="text" id="author" required placeholder="Robert C. Martin">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Categoría</label>
+                        <input type="text" id="category" placeholder="Programming">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publication-date">Fecha de Publicación</label>
+                        <input type="date" id="publication-date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Precio</label>
+                        <input type="number" id="price" step="0.01" placeholder="45.99">
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="available" checked>
+                            Disponible
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-btn">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Búsquedas -->
+            <section class="search-section">
+                <h2>🔍 Búsquedas Avanzadas</h2>
+                
+                <div class="search-tabs">
+                    <button class="tab-btn active" data-tab="all">Todos</button>
+                    <button class="tab-btn" data-tab="title">Por Título</button>
+                    <button class="tab-btn" data-tab="author">Por Autor</button>
+                    <button class="tab-btn" data-tab="price">Por Precio</button>
+                    <button class="tab-btn" data-tab="date">Por Fecha</button>
+                </div>
+
+                <div class="search-panels">
+                    <div class="search-panel active" id="panel-all">
+                        <button class="btn btn-primary" onclick="loadAllBooks()">Cargar Todos</button>
+                    </div>
+
+                    <div class="search-panel" id="panel-title">
+                        <input type="text" id="search-title" placeholder="Buscar por título...">
+                        <button class="btn btn-primary" onclick="searchByTitle()">Buscar</button>
+                    </div>
+
+                    <div class="search-panel" id="panel-author">
+                        <input type="text" id="search-author" placeholder="Nombre del autor">
+                        <button class="btn btn-primary" onclick="searchByAuthor()">Buscar</button>
+                    </div>
+
+                    <div class="search-panel" id="panel-price">
+                        <input type="number" id="min-price" placeholder="Precio mínimo" step="0.01">
+                        <input type="number" id="max-price" placeholder="Precio máximo" step="0.01">
+                        <button class="btn btn-primary" onclick="searchByPriceRange()">Buscar</button>
+                    </div>
+
+                    <div class="search-panel" id="panel-date">
+                        <button class="btn btn-primary" onclick="loadSortedByDate()">
+                            Ordenar por Fecha de Publicación
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de Libros -->
+            <section class="books-section">
+                <h2>📖 Listado de Libros <span id="book-count">(0)</span></h2>
+                <div id="books-container">
+                    <p class="no-data">No hay libros. Haz clic en "Cargar Todos" para ver los libros disponibles.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
